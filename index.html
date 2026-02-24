@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GR7 Consultoria Mineral | Geoposicionamento</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="brand-header">
+        <h1>GR7 <span>Consultoria Mineral</span></h1>
+        <p>Sistema de Inteligência e Geoposicionamento de Sedimentos</p>
+    </div>
+
+    <header class="header-stats">
+        <div class="stat-card">
+            <span>Status da API</span>
+            <h4 id="conn-status" style="color: #F59E0B;">Sincronizando...</h4>
+        </div>
+        <div class="stat-card">
+            <span>Pallets Ativos</span>
+            <h4 id="stat-pallets">--</h4>
+        </div>
+    </header>
+
+    <main class="mapa-container">
+        <div class="mapa-grid">
+            <div class="pallet" style="grid-area: A3" onclick="abrirModal('A3')">
+                <span class="pallet-label">A3</span>
+                <span class="status-badge">Operacional</span>
+            </div>
+            <div class="pallet" style="grid-area: B3" onclick="abrirModal('B3')">
+                <span class="pallet-label">B3</span>
+                <span class="status-badge">Operacional</span>
+            </div>
+            <div class="pallet" style="grid-area: A2" onclick="abrirModal('A2')">
+                <span class="pallet-label">A2</span>
+                <span class="status-badge">Operacional</span>
+            </div>
+            <div class="pallet" style="grid-area: B2" onclick="abrirModal('B2')">
+                <span class="pallet-label">B2</span>
+                <span class="status-badge">Operacional</span>
+            </div>
+            <div class="pallet" style="grid-area: A1" onclick="abrirModal('A1')">
+                <span class="pallet-label">A1</span>
+                <span class="status-badge">Operacional</span>
+            </div>
+            <div class="pallet" style="grid-area: B1" onclick="abrirModal('B1')">
+                <span class="pallet-label">B1</span>
+                <span class="status-badge">Operacional</span>
+            </div>
+        </div>
+        <div class="portao">ACESSO PRINCIPAL / EXPEDIÇÃO</div>
+    </main>
+
+    <div id="meuModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-titulo">Pallet</h2>
+                <p>Selecione uma posição para detalhes da amostra</p>
+            </div>
+
+            <div class="grid-3x3">
+                <div class="posicao-saco" data-pos="1" onclick="selecionarPosicao(this, 1)">1</div>
+                <div class="posicao-saco" data-pos="2" onclick="selecionarPosicao(this, 2)">2</div>
+                <div class="posicao-saco" data-pos="3" onclick="selecionarPosicao(this, 3)">3</div>
+                <div class="posicao-saco" data-pos="4" onclick="selecionarPosicao(this, 4)">4</div>
+                <div class="posicao-saco" data-pos="5" onclick="selecionarPosicao(this, 5)">5</div>
+                <div class="posicao-saco" data-pos="6" onclick="selecionarPosicao(this, 6)">6</div>
+                <div class="posicao-saco" data-pos="7" onclick="selecionarPosicao(this, 7)">7</div>
+                <div class="posicao-saco" data-pos="8" onclick="selecionarPosicao(this, 8)">8</div>
+                <div class="posicao-saco" data-pos="9" onclick="selecionarPosicao(this, 9)">9</div>
+            </div>
+
+            <div id="info-box" class="info-box">
+                <h4>Ficha Técnica GR7</h4>
+                <table class="info-table">
+                    <tr><th>LAUDO:</th><td id="res-laudo">--</td></tr>
+                    <tr><th>REF/LOTE:</th><td id="res-material">--</td></tr>
+                    <tr><th>SAMPLE ID:</th><td id="res-sample">--</td></tr>
+                </table>
+            </div>
+
+            <button class="btn-close" onclick="fecharModal()">FECHAR PAINEL</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
