@@ -75,5 +75,56 @@ function fecharModal() {
 window.onclick = (e) => {
     if (e.target == document.getElementById('meuModal')) fecharModal();
 }
+function buscarLote(event) {
+    if (event.key === 'Enter') {
+        executarBusca();
+    }
+}
 
+// Executa o filtro na base de dados
+function executarBusca() {
+    const termo = document.getElementById('input-busca').value.trim().toLowerCase();
+    const container = document.getElementById('resultados-busca');
+    
+    // Limpa os resultados antigos antes de mostrar os novos
+    container.innerHTML = '';
+
+    // Se o campo estiver vazio, não faz nada
+    if (termo === '') return;
+
+    // Procura o termo digitado em Lote, Sample ou Laudo
+    const resultados = dadosInventario.filter(item => 
+        (item.referencia && item.referencia.toLowerCase().includes(termo)) ||
+        (item.sample && item.sample.toLowerCase().includes(termo)) ||
+        (item.laudo && item.laudo.toLowerCase().includes(termo))
+    );
+
+    // Se não achar nada, avisa o usuário
+    if (resultados.length === 0) {
+        container.innerHTML = `
+            <div class="resultado-item" style="border-left-color: #EF4444;">
+                <div class="resultado-info">
+                    <strong style="color: #EF4444;">Nenhuma amostra encontrada</strong>
+                    <small>Verifique o termo digitado e tente novamente.</small>
+                </div>
+            </div>`;
+        return;
+    }
+
+    // Se achar, cria um "cartão" para cada resultado mostrando onde está
+    resultados.forEach(res => {
+        const div = document.createElement('div');
+        div.className = 'resultado-item';
+        div.innerHTML = `
+            <div class="resultado-info">
+                <strong>REF: ${res.referencia}</strong>
+                <small>Laudo: ${res.laudo} | Sample: ${res.sample}</small>
+            </div>
+            <div class="resultado-loc">
+                Pallet ${res.pallet} - Pos ${res.posicao}
+            </div>
+        `;
+        container.appendChild(div);
+    });
+}
 fetchSheetsData();
