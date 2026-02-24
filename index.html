@@ -24,6 +24,14 @@
         </div>
     </header>
 
+    <div class="search-container">
+        <input type="text" id="input-busca" placeholder="Buscar Referência/Lote, Sample ou Laudo..." onkeyup="buscarLote(event)">
+        <button class="btn-busca" onclick="executarBusca()">Pesquisar</button>
+    </div>
+    <div id="resultados-busca" class="resultados-busca"></div>
+    
+    
+
     <main class="mapa-container">
         <div class="mapa-grid">
             <div class="pallet" style="grid-area: A3" onclick="abrirModal('A3')">
