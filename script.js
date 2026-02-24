@@ -7,21 +7,23 @@ async function fetchSheetsData() {
         const response = await fetch(API_URL, { redirect: "follow" });
         const data = await response.json();
         
+        // Mapeamento corrigido com os nomes exatos do cabeçalho da sua planilha
         dadosInventario = data.map(item => ({
-            pallet: String(item.pallet_id || item.Pallet || item.pallet || "").trim().toUpperCase(),
-            posicao: String(item.posicao || item.Posicao || ""),
-            referencia: item.referencia_lote || item.Referencia || item.referencia || "--",
-            sample: item.sample_id || item.Sample || item.sample || "--",
-            laudo: item.laudo || item.Laudo || "--"
-        })).filter(d => d.pallet);
+            pallet: String(item['Pallet ID'] || "").trim().toUpperCase(),
+            posicao: String(item['Posição'] || ""),
+            referencia: item['Referência/Lote'] || "--",
+            sample: item['Sample_ID'] || "--",
+            laudo: item['Laudo'] || "--"
+        })).filter(d => d.pallet !== "");
 
         document.getElementById('conn-status').innerText = "ONLINE";
         document.getElementById('conn-status').style.color = "#10B981";
         
+        // Atualiza a contagem de Pallets
         const totalPallets = [...new Set(dadosInventario.map(d => d.pallet))].length;
         document.getElementById('stat-pallets').innerText = totalPallets;
         
-        console.log("Inventário GR7 sincronizado com sucesso.");
+        console.log("Inventário GR7 sincronizado com sucesso:", dadosInventario);
     } catch (err) {
         console.error("Erro de CORS ou Conexão:", err);
         document.getElementById('conn-status').innerText = "ERRO DE CONEXÃO";
