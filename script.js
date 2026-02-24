@@ -1,10 +1,10 @@
-const API_URL = 'https://script.google.com/macros/s/AKfycbzvoxNo9VMfVOvrSpNytm2qSs6G52iX9bLqJK8lI9SABblWbdz56L_vUXUDYrXuukxm/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbxfxrea49ztld46WUIiUlzC4xcexcA8tCq9FCBXpusPriTleYCYG1HsO7Kx2Jignl8_Qw/exec';
 
 let dadosInventario = [];
 
 async function fetchSheetsData() {
     try {
-        const response = await fetch(API_URL);
+        const response = await fetch(API_URL, { redirect: "follow" });
         const data = await response.json();
         
         dadosInventario = data.map(item => ({
