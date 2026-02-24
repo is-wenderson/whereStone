@@ -33,11 +33,42 @@ body { font-family: 'Inter', sans-serif; background: var(--color-bg); color: var
 .pallet-label { font-weight: 800; color: var(--color-primary); display: block; font-size: 1.2rem; }
 .status-badge { font-size: 0.65rem; background: #DCFCE7; color: #166534; padding: 4px 10px; border-radius: 12px; font-weight: 700; display: inline-block; margin-top: 8px; }
 
-.portao { margin-top: 60px; width: 460px; height: 45px; background: #E2E8F0; border: 2px dashed #94A3B8; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; border-radius: 8px; color: #475569; letter-spacing: 2px; }
+/* SUBSTITUÍDO: Portão responsivo */
+.portao { 
+    margin-top: 60px; 
+    width: 100%; 
+    max-width: 460px; 
+    height: 45px; 
+    background: #E2E8F0; 
+    border: 2px dashed #94A3B8; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 0.75rem; 
+    font-weight: 800; 
+    border-radius: 8px; 
+    color: #475569; 
+    letter-spacing: 2px; 
+}
 
 /* Modal GR7 */
 .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(6px); }
-.modal-content { background: var(--color-surface); margin: 5% auto; padding: 30px; width: 90%; max-width: 420px; border-radius: 24px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); }
+
+/* SUBSTITUÍDO: Modal content com rolagem interna (overflow-y) */
+.modal-content { 
+    background: var(--color-surface); 
+    margin: 5% auto; 
+    padding: 30px; 
+    width: 90%; 
+    max-width: 420px; 
+    border-radius: 24px; 
+    text-align: center; 
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3); 
+    border: 1px solid rgba(255,255,255,0.1); 
+    max-height: 90vh; 
+    overflow-y: auto; 
+}
+
 .modal-header { margin-bottom: 24px; }
 .modal-header h2 { color: var(--color-primary); font-weight: 800; margin-bottom: 5px; }
 .modal-header p { font-size: 0.85rem; color: var(--color-text-muted); }
@@ -55,6 +86,7 @@ body { font-family: 'Inter', sans-serif; background: var(--color-bg); color: var
 
 .btn-close { width: 100%; padding: 14px; margin-top: 24px; background: var(--color-primary); color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: 700; letter-spacing: 1px; transition: 0.2s; }
 .btn-close:hover { background: #1E40AF; }
+
 .search-container {
     display: flex;
     justify-content: center;
@@ -143,3 +175,43 @@ body { font-family: 'Inter', sans-serif; background: var(--color-bg); color: var
 }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+/* =========================================
+   ADICIONADO: RESPONSIVIDADE (CELULARES)
+========================================= */
+@media (max-width: 600px) {
+    .brand-header h1 { font-size: 1.8rem; }
+    
+    /* Coloca os status um embaixo do outro se faltar espaço */
+    .header-stats { flex-direction: column; gap: 12px; padding: 15px; }
+    .stat-card { width: 100%; min-width: auto; }
+
+    /* Ajusta o grid dos pallets para não espremer */
+    .mapa-grid { 
+        grid-template-columns: repeat(2, 1fr); /* Divide o espaço igualmente */
+        gap: 20px 15px; /* Reduz o buraco gigante no meio */
+        width: 100%;
+    }
+    
+    .pallet { padding: 15px 10px; }
+    .pallet-label { font-size: 1rem; }
+    
+    /* Deixa a pesquisa mais amigável no celular */
+    .search-container { flex-direction: column; padding: 0 15px; }
+    .btn-busca { padding: 14px; }
+
+    /* Ajusta o Modal para não cortar nada e ser rolável */
+    .modal-content { 
+        margin: 15px auto; 
+        padding: 20px 15px; 
+        width: 95%; 
+        max-height: 85vh; /* Garante que caiba na tela e habilite rolagem se necessário */
+    }
+    .grid-3x3 { gap: 8px; padding: 10px; margin: 15px 0; }
+    .posicao-saco { font-size: 0.85rem; }
+    .btn-close { margin-top: 15px; padding: 12px; }
+    
+    /* Ajustes finos nos resultados de busca para tela pequena */
+    .resultado-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .resultado-loc { align-self: flex-start; }
+}
